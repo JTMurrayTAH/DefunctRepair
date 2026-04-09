@@ -40,4 +40,3 @@ void UCPPTraversalComp::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 	// ...
 }
-
