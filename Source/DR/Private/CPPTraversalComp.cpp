@@ -28,7 +28,7 @@ void UCPPTraversalComp::BeginPlay()
 	{
 		ownerChar->GetCharacterMovement()->MaxWalkSpeed = TravStats->walkSpeed;
 	}
-	// ...
+
 	
 }
 

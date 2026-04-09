@@ -4,6 +4,8 @@
 #include "EnhancedInputSubsystems.h"
 #include "CPP_Player.h"
 
+#include "GameFramework/CharacterMovementComponent.h"
+
 // Sets default values
 ACPP_Player::ACPP_Player()
 {
@@ -18,6 +20,12 @@ void ACPP_Player::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+void ACPP_Player::CallOnVelocityMove()
+{
+	float vel = GetCharacterMovement()->GetVelocityForNavMovement().Size();
+	OnVelocityMove.Broadcast(vel);
 }
 
 // Called every frame

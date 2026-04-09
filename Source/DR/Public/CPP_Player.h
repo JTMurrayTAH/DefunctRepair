@@ -6,7 +6,7 @@
 #include "CPPTraversalComp.h"
 #include "GameFramework/Character.h"
 #include "CPP_Player.generated.h"
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnVelocity, float, Velocity);
 UCLASS()
 class DR_API ACPP_Player : public ACharacter
 {
@@ -15,6 +15,8 @@ class DR_API ACPP_Player : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ACPP_Player();
+	UPROPERTY(BlueprintAssignable, Category="Velocity")
+	FOnVelocity OnVelocityMove;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Instanced)
 	UCPPTraversalComp* TravComp;
 
@@ -22,6 +24,9 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UFUNCTION(BlueprintCallable, Category="Movement")
+	void CallOnVelocityMove();
 
 public:	
 	// Called every frame
