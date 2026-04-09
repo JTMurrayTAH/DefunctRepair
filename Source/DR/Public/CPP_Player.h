@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CPPTraversalComp.h"
 #include "GameFramework/Character.h"
 #include "CPP_Player.generated.h"
 
@@ -14,7 +15,10 @@ class DR_API ACPP_Player : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ACPP_Player();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Instanced)
+	UCPPTraversalComp* TravComp;
 
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
