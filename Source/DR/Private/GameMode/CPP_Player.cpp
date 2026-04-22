@@ -2,7 +2,8 @@
 
 
 
-#include "CPP_Player.h"
+#include "GameMode/CPP_Player.h"
+
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
