@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "Data/Threshold/S_Threshold.h"
 #include "Stamina.generated.h"
 
 
@@ -16,7 +15,6 @@ class DR_API UStamina : public UActorComponent
 public:
 	// Sets default values for this component's properties
 	UStamina();
-	FS_Threshold Threshold;
 
 protected:
 	// Called when the game starts
