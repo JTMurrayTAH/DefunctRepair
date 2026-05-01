@@ -14,7 +14,7 @@ class UiDamagable : public UInterface
 };
 
 /**
- * 
+ * General interface for Damage.
  */
 class DR_API IiDamagable
 {

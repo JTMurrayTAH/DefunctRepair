@@ -14,7 +14,7 @@ class UiOperation : public UInterface
 };
 
 /**
- * 
+ * The "construction" interface for player building systems.
  */
 class DR_API IiOperation
 {

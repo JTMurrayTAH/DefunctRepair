@@ -14,7 +14,7 @@ class UiInteractable : public UInterface
 };
 
 /**
- * 
+ * General Interface for interaction.
  */
 class DR_API IiInteractable
 {
