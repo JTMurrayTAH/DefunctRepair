@@ -4,17 +4,31 @@
 
 #include "GameMode/CPP_Player.h"
 
+#include "InputAction.h"
+#include "InputMappingContext.h"
+#include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "GameFramework/CharacterMovementComponent.h"
+#include "EnhancedInputComponent.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 ACPP_Player::ACPP_Player()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	
 	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
-	PlayerCamera->SetupAttachment(GetRootComponent());
+	CapsuleComp = CreateDefaultSubobject<UCapsuleComponent>(TEXT("PlayerCollision"));
+	RootComponent = CapsuleComp;
+	DrMovement = CreateDefaultSubobject<UCpp_DrMovement>(TEXT("DrMovement"));
+	PlayerMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("PlayerMesh"));
+	
 	PlayerCamera->bUsePawnControlRotation = true;
+	
+	PlayerCamera->SetupAttachment(CapsuleComp);
+	DrMovement->UpdatedComponent = CapsuleComp;
+	
+	
 
 }
 
@@ -23,6 +37,18 @@ void ACPP_Player::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if (APlayerController* PC = Cast<APlayerController>(GetController()))
+	{
+		if (ULocalPlayer* LP = PC->GetLocalPlayer())
+		{
+			if (UEnhancedInputLocalPlayerSubsystem* Subsystem =
+				LP->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
+			{
+				Subsystem->AddMappingContext(DefaultMappingContext, 0);
+			}
+		}
+	}
+	
 }
 
 
@@ -30,12 +56,39 @@ void ACPP_Player::BeginPlay()
 void ACPP_Player::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
+	
 
+}
+
+void ACPP_Player::Move(const FInputActionValue& moveInput)
+{
+	if (GetController() == nullptr) return;
+	
+	const FVector forward = GetActorForwardVector();
+	const FVector2D moveVector = moveInput.Get<FVector2D>();
+	AddMovementInput(forward, moveVector.Y);
+	
+	const FVector right = GetActorRightVector();
+	AddMovementInput(right, moveVector.X);
+	
 }
 
 // Called to bind functionality to input
 void ACPP_Player::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	if (UEnhancedInputComponent* EIC =
+		Cast<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		EIC->BindAction(
+			MoveAction,
+			ETriggerEvent::Triggered,
+			this,
+			&ACPP_Player::Move
+		);
+	}
+	UE_LOG(LogTemp, Warning, TEXT("This is a debug log message from C++"));
 }
 

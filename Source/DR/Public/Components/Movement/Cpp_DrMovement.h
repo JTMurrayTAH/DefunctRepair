@@ -3,28 +3,40 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
+#include "GameFramework/PawnMovementComponent.h"
 #include "Cpp_DrMovement.generated.h"
 
-
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
-class DR_API UCpp_DrMovement : public UActorComponent
+class DR_API UCpp_DrMovement : public UPawnMovementComponent
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this component's properties
+
 	UCpp_DrMovement();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
+	float WalkAcceleration = 1800.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
+	float WalkSpeed = 600.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
+	float BrakePower = 2200.f;
+	
+
+	virtual float GetMaxAcceleration() const;
+	virtual float GetMaxSpeed() const override;
+
 protected:
-	// Called when the game starts
+
 	virtual void BeginPlay() override;
 
 public:
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
-	                           FActorComponentTickFunction* ThisTickFunction) override;
-	
-	void MoveFB();
-	void MoveLR();
+
+	virtual void TickComponent(
+		float DeltaTime,
+		ELevelTick TickType,
+		FActorComponentTickFunction* ThisTickFunction
+	) override;
 };
