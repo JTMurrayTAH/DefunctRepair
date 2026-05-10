@@ -22,4 +22,12 @@ class DR_API IiInteractable
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category="Interaction")
+	void TryToInteract(AActor* Interactor);
+	
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category="Interaction")
+	void Successful_Interactor(AActor* Interactor);
+	
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category="Interaction")
+	void Failed_Interact(AActor* Interactor);
 };
