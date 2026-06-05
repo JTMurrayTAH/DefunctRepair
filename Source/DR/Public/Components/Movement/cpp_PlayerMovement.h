@@ -7,7 +7,7 @@
 #include "cpp_PlayerMovement.generated.h"
 
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class DR_API Ucpp_PlayerMovement : public UCharacterMovementComponent
 {
 	GENERATED_BODY()
