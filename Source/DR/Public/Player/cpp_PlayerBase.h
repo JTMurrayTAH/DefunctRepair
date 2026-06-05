@@ -15,7 +15,7 @@ class DR_API Acpp_PlayerBase : public ACharacter
 public:
 	// Sets default values for this character's properties
 	Acpp_PlayerBase();
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Blueprintable, BlueprintReadWrite)
 	TObjectPtr<UCameraComponent> PlayerCamera;
 	
 	
@@ -27,6 +27,7 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	virtual void PossessedBy(AController* NewController) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

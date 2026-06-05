@@ -4,6 +4,7 @@
 #include "Player/cpp_PlayerBase.h"
 
 #include "Camera/CameraComponent.h"
+#include "GameMode/Cpp_DrPController.h"
 
 
 // Sets default values
@@ -26,6 +27,15 @@ void Acpp_PlayerBase::BeginPlay()
 void Acpp_PlayerBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
+
+void Acpp_PlayerBase::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	if (ACpp_DrPController* PlayerController = Cast<ACpp_DrPController>(NewController))
+	{
+		
+	}
 }
 
 // Called to bind functionality to input
