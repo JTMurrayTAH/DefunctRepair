@@ -18,7 +18,7 @@ UCLASS()
 class DR_API ACpp_DrPController : public APlayerController
 {
 	GENERATED_BODY()
-	
+	public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Events")
 	FEDMovementInput OnMovementInput;
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Events")
