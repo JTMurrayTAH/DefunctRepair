@@ -7,7 +7,7 @@
 #include "iInteractable.generated.h"
 
 // This class does not need to be modified.
-UINTERFACE()
+UINTERFACE(Blueprintable)
 class UiInteractable : public UInterface
 {
 	GENERATED_BODY()
@@ -26,7 +26,7 @@ public:
 	void TryToInteract(AActor* Interactor);
 	
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category="Interaction")
-	void Successful_Interactor(AActor* Interactor);
+	void Successful_Interact(AActor* Interactor);
 	
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category="Interaction")
 	void Failed_Interact(AActor* Interactor);
