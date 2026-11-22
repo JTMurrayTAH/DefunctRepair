@@ -30,4 +30,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category="Interaction")
 	void Failed_Interact(AActor* Interactor);
+	
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category="Interaction")
+	void Interaction_Logic(AActor* Interactor);
 };
